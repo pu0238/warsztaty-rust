@@ -3,7 +3,9 @@
     "warsztaty_rust_backend": {
       "candid": "src/warsztaty_rust_backend/warsztaty_rust_backend.did",
       "package": "warsztaty_rust_backend",
-      "type": "rust"
+      "type": "custom",
+      "build": "./build.sh warsztaty_rust_backend",
+      "wasm": "target/wasm32-unknown-unknown/release/warsztaty_rust_backend.wasm"
     },
     "warsztaty_rust_frontend": {
       "dependencies": [
