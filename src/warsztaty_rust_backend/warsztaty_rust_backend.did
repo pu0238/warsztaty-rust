@@ -1,1 +1,5 @@
-service : { dodaj_wpis : (text) -> () query; greet : (text) -> (text) query }
+service : {
+  dodaj_wpis : (text) -> ();
+  greet : (text) -> (text) query;
+  pobierz_wpisy : () -> (vec text) query;
+}
