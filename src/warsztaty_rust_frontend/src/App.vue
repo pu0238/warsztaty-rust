@@ -1,15 +1,31 @@
-<script setup>
+<script lang="ts">
 import { ref } from 'vue';
 import { warsztaty_rust_backend } from 'declarations/warsztaty_rust_backend/index';
-let greeting = ref('');
 
-async function handleSubmit(e) {
-  e.preventDefault();
-  const target = e.target;
-  const name = target.querySelector('#name').value;
-  await warsztaty_rust_backend.greet(name).then((response) => {
-    greeting.value = response;
-  });
+export default {
+  data() {
+    return {
+      greeting: '',
+      wpisy: [],
+    }
+  },
+  methods: {
+    async handleSubmit(e) {
+      e.preventDefault();
+      const target = e.target;
+      const name = target.querySelector('#name').value;
+      await warsztaty_rust_backend.greet(name).then((response) => {
+        this.greeting = response;
+      });
+    },
+    async pobierzWpisy() {
+      const wpisy = await warsztaty_rust_backend.pobierz_wpisy()
+      this.wpisy = wpisy
+    },
+  },
+  async mounted() {
+      await this.pobierzWpisy()
+  }
 }
 </script>
 
@@ -24,5 +40,6 @@ async function handleSubmit(e) {
       <button type="submit">Click Me!</button>
     </form>
     <section id="greeting">{{ greeting }}</section>
+    <div>{{ wpisy }}</div>
   </main>
 </template>
