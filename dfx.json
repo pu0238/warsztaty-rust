@@ -1,0 +1,27 @@
+{
+  "canisters": {
+    "warsztaty_rust_backend": {
+      "candid": "src/warsztaty_rust_backend/warsztaty_rust_backend.did",
+      "package": "warsztaty_rust_backend",
+      "type": "rust"
+    },
+    "warsztaty_rust_frontend": {
+      "dependencies": [
+        "warsztaty_rust_backend"
+      ],
+      "source": [
+        "src/warsztaty_rust_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "warsztaty_rust_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
