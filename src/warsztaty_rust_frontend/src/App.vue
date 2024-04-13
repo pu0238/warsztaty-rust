@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 import { ref } from 'vue';
 import { warsztaty_rust_backend } from 'declarations/warsztaty_rust_backend/index';
 
@@ -7,6 +7,7 @@ export default {
     return {
       greeting: '',
       wpisy: [],
+      nowyWpis: ''
     }
   },
   methods: {
@@ -22,6 +23,12 @@ export default {
       const wpisy = await warsztaty_rust_backend.pobierz_wpisy()
       this.wpisy = wpisy
     },
+    async dodajWpis() {
+      if (this.nowyWpis.trim() === "") return;
+      await warsztaty_rust_backend.dodaj_wpis(this.nowyWpis)
+      console.log("dodano nowy wpis!")
+      await this.pobierzWpisy()
+    }
   },
   async mounted() {
       await this.pobierzWpisy()
@@ -40,6 +47,10 @@ export default {
       <button type="submit">Click Me!</button>
     </form>
     <section id="greeting">{{ greeting }}</section>
+    <div>
+      <input v-model="nowyWpis">
+      <button @click="dodajWpis()">Zapisz wpis</button>
+    </div>
     <div>{{ wpisy }}</div>
   </main>
 </template>
